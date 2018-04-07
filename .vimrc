@@ -86,8 +86,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'Chiel92/vim-autoformat'
 "let g:formatter_yapf_style = 'pep8'
 let g:autoformat_verbosemode=1
-let g:formatterpath =
-['/usr/local/bin/yapf','/usr/local/bin/js-beautify','/usr/local/go/bin/gofmt']
+let g:formatterpath =['/usr/local/bin/yapf','/usr/local/bin/js-beautify','/usr/local/go/bin/gofmt']
 "一键运行
 "Plugin 'skywind3000/asyncrun.vim'
 "ale 语法检查
