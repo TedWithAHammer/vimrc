@@ -4,6 +4,11 @@ set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'majutsushi/tagbar'
+let g:tagbar_width=30
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_auto_faocus =1
+autocmd BufReadPost *.py call tagbar#autoopen()
 " js setting
 Plugin 'hail2u/vim-css3-syntax'
 
@@ -28,7 +33,6 @@ Plugin 'Valloric/YouCompleteMe'
 let g:ycm_python_binary_path = '/usr/local/bin/python3'
 let g:ycm_server_python_interpreter='/usr/local/bin/python3'
 let g:ycm_global_ycm_extra_conf='/Users/wangliying/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
-
 " file browser
 Plugin 'scrooloose/nerdtree'
 let NERDChristmasTree=0
@@ -91,6 +95,8 @@ let g:formatterpath =['/usr/local/bin/yapf','/usr/local/bin/js-beautify','/usr/l
 "Plugin 'skywind3000/asyncrun.vim'
 "ale 语法检查
 Plugin 'w0rp/ale'
+let g:ale_python_flake8_executable = '/usr/local/bin/flake8'
+let g:ale_python_flake8_use_global = 1
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 let g:ale_sign_error = '✗'
@@ -191,7 +197,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "				keymap setting						"
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F5> :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
 	exec "w"
@@ -201,12 +206,12 @@ func! CompileRunGcc()
 		:!time sh %
 	endif
 endfunc
-map <C-t> :NERDTreeToggle<CR>
-"map <F3> gg=G<CR>
-noremap <F4> :Autoformat<CR>
-nmap <C-j> :%!python -m json.tool<CR>
-nmap <Leader>d :ALEDetail<CR>
 
+map <F5> :call CompileRunGcc()<CR>
+map <C-t> :NERDTreeToggle<CR>
+nmap <S-f> :Autoformat<CR>
+nmap <Leader>d :ALEDetail<CR>
+nmap <F4> :TagbarToggle<CR>
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
@@ -216,7 +221,6 @@ nmap <Leader>d :ALEDetail<CR>
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 " put plugin setting here
-
 
 
 
