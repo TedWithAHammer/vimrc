@@ -88,7 +88,7 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'flazz/vim-colorschemes'
 "代码格式化
 Plugin 'Chiel92/vim-autoformat'
-"let g:formatter_yapf_style = 'pep8'
+let g:formatter_yapf_style = 'pep8'
 let g:autoformat_verbosemode=1
 let g:formatterpath =['/usr/local/bin/yapf','/usr/local/bin/js-beautify','/usr/local/go/bin/gofmt']
 "一键运行
