@@ -7,7 +7,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'majutsushi/tagbar'
 let g:tagbar_width=30
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:tagbar_auto_faocus =1
+let g:tagbar_auto_focus =1
 autocmd BufReadPost *.py call tagbar#autoopen()
 " js setting
 Plugin 'hail2u/vim-css3-syntax'
@@ -48,8 +48,6 @@ let NERDTreeWinPos="left"
 "let g:solarized_termcolors = 256
 "let g:solarized_contrast   = "high"
 "let g:solarized_visibility = "high"
-" super search
-Plugin 'kien/ctrlp.vim'
 "缩进线
 Plugin 'Yggdroot/indentLine'
 "括号自动补全
@@ -88,15 +86,15 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'flazz/vim-colorschemes'
 "代码格式化
 Plugin 'Chiel92/vim-autoformat'
-let g:formatter_yapf_style = 'pep8'
-let g:autoformat_verbosemode=1
-let g:formatterpath =['/usr/local/bin/yapf','/usr/local/bin/js-beautify','/usr/local/go/bin/gofmt']
+let g:autoformat_verbosemode=0
+let g:formatterpath =['/usr/local/bin/autopep8','/usr/local/bin/js-beautify','/usr/local/go/bin/gofmt']
 "一键运行
 "Plugin 'skywind3000/asyncrun.vim'
 "ale 语法检查
 Plugin 'w0rp/ale'
-let g:ale_python_flake8_executable = '/usr/local/bin/flake8'
-let g:ale_python_flake8_use_global = 1
+"文件内容发生变化时不进行检查
+let g:ale_lint_on_text_changed = 'never'
+"打开文件时不进行检查
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 let g:ale_sign_error = '✗'
@@ -105,8 +103,7 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
-let g:ale_linters = {'python': ['flake8', 'mypy', 'pylint']}
-"Plugin 'python-mode/python-mode'
+let g:ale_linters = {'python': ['flake8']}
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -182,6 +179,37 @@ colorscheme iceberg
 "jellybeans
 " 显示指令
 set showcmd
+set clipboard=unnamed
+"""""""""""function section
+"执行py或者sh
+func! CompileRunGcc()
+	exec "w"
+	if &filetype == 'python'
+		exec '!time python %'
+	elseif &filetype == 'sh'
+		:!time sh %
+	endif
+endfunc
+"生成文件名
+func! FileName()  
+    if line("$") > 10  
+        let l = 10  "这里是字母L 不是数字1   
+    else  
+        let l = line("$")  
+    endif   
+    exe "1," . l . "g/File Name:.*/s/File Name:.*/File Name: " .expand("%")    
+       "最前面是数字1，这里的File Name: 要和模板中一致  
+endfun   
+"生成创建时间
+func! CreateTime()  
+    if line("$") > 10  
+        let l = 10  
+    else  
+        let l = line("$")  
+    endif   
+    exe "1," . l . "g/Create Time:.*/s/Create Time:.*/Create Time: " .strftime("%Y-%m-%d %T")   
+        "这里Create Time: 要和模板中一致  
+endfun
 """""""""""python setting
 au BufNewFile,BufRead *.py
 			\ set tabstop=4 |
@@ -192,25 +220,32 @@ au BufNewFile,BufRead *.py
 			\ set autoindent |
 			\ set fileformat=unix
 
+au BufNewFile *.py
+			\ set tabstop=4 |
+			\ set softtabstop=4 |
+			\ set shiftwidth=4 |
+			\ set textwidth=79 |
+			\ set expandtab |
+			\ set autoindent |
+			\ set fileformat=unix |
+			\ 0r ~/.vim/template/python_header |
+			\ ks | call CreateTime() | 's
+
+"""""""""""sh setting
+au BufNewFile *.sh
+			\ 0r ~/.vim/template/sh_header |
+			\ ks | call CreateTime() | 's
+
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "				keymap setting						"
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 
-func! CompileRunGcc()
-	exec "w"
-	if &filetype == 'python'
-		exec '!time python %'
-	elseif &filetype == 'sh'
-		:!time sh %
-	endif
-endfunc
-
 map <F5> :call CompileRunGcc()<CR>
 map <C-t> :NERDTreeToggle<CR>
 nmap <S-f> :Autoformat<CR>
-nmap <Leader>d :ALEDetail<CR>
+"nmap <Leader>d :ALEDetail<CR>
 nmap <F4> :TagbarToggle<CR>
 " Brief help
 " :PluginList       - lists configured plugins
