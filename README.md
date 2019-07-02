@@ -1,4 +1,6 @@
-# vimrc
+## vimrc
+该文件为最新的vim配置 自动补全不是ycm
+## .vimrc
 依赖
 1. pip
 2. js-beautify(json formatter)
