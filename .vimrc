@@ -1,264 +1,184 @@
 set nocompatible
-" set the runtime path to include Vundle and initialize
-" plugin section
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'majutsushi/tagbar'
-let g:tagbar_width=30
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:tagbar_auto_focus =1
-autocmd BufReadPost *.py call tagbar#autoopen()
-" js setting
-Plugin 'hail2u/vim-css3-syntax'
-
-Plugin 'othree/html5.vim'
-Plugin 'pangloss/vim-javascript'
-" Plugin 'maksimr/vim-jsbeautify'
-Plugin 'vim-scripts/CmdlineComplete'
-" let Vundle manage Vundle, required
-" git plugin
-Plugin 'tpope/vim-fugitive'
-" Git plugin not hosted on GitHulet g:ycm_global_ycm_extra_conf = '~/.vim/Plugin/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-Plugin 'git://git.wincent.com/command-t.git'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" code completioni
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_python_binary_path = '/usr/bin/python'
-let g:ycm_server_python_interpreter='/usr/bin/python'
-let g:ycm_global_ycm_extra_conf='/Users/leo/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
-" file browser
-Plugin 'scrooloose/nerdtree'
-let NERDChristmasTree=0
-let NERDTreeWinSize=35
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
-let NERDTreeShowBookmarks=1
-let NERDTreeWinPos="left"
-
-" color theme
-"Plugin 'altercation/solarized'
-"let g:solarized_termtrans  = 1
-"let g:solarized_termcolors = 256
-"let g:solarized_contrast   = "high"
-"let g:solarized_visibility = "high"
-"缩进线
-Plugin 'Yggdroot/indentLine'
-"括号自动补全
-Plugin 'jiangmiao/auto-pairs'
-" fancy statusbar
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-let g:airline_theme='bubblegum'
-let g:airline#extensions#tabline#enabled =1
-let g:airline_powerline_fonts=1
-if !exists('g:airline_symbols')
-	let g:airline_symbols={}
-endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '>'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '<'
-let g:airline_symbols.crypt = ''
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.maxlinenr = '☰'
-let g:airline_symbols.branch = ''
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" Plugin 'suan/vim-instant-markdown'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-let g:vim_markdown_frontmatter=1
-let g:vim_markdown_folding_disabled =1
-
-" indentpython
-Plugin 'vim-scripts/indentpython.vim'
-"color-schemes
-Plugin 'flazz/vim-colorschemes'
-"代码格式化
-Plugin 'Chiel92/vim-autoformat'
-let g:autoformat_verbosemode=0
-let g:formatterpath =['/usr/local/bin/autopep8','/usr/local/bin/js-beautify','/usr/local/go/bin/gofmt']
-"一键运行
-"Plugin 'skywind3000/asyncrun.vim'
-"ale 语法检查
-Plugin 'w0rp/ale'
-"文件内容发生变化时不进行检查
-let g:ale_lint_on_text_changed = 'never'
-"打开文件时不进行检查
-let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 0
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
-let g:ale_linters = {'python': ['flake8','pylint']}
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
-" required
-filetype off
-" 允许插件
-filetype plugin on
-" 启动自动补全
-filetype plugin indent on
-" 语法高亮
+set nu
+set ts=2
 syntax on
-" 文件修改后自动载入
-set autoread
-" 关闭交换文件
-set noswapfile
-" 突出现实当前行
-set cursorline
-" 括号匹配，跳转并高亮显示匹配的括号
-set showmatch
-set norelativenumber
-" 插入模式绝对行号，普通模式相对
-" 设置文件编码
-set encoding=utf-8
-set langmenu=zh_CH.UTF-8
-set termencoding=utf-8
-set fileencodings=utf-8,gbk,ucs-bom,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-" 自动补全设置
-set completeopt=longest,menu
-" 设置backspace与delete的灵活程度，backspace=2则没有任何限制
-set backspace=2
-"
-set shiftwidth=4
-"
-set t_Co=256
-" 搜索时忽略大小写
+filetype on
+filetype plugin on
+filetype indent on
+set sw=4
+set history=1024
+set nocursorline
 set ignorecase
-" 启用鼠标
-set mouse=a
-" 窗口默认高度
-"set lines=80
-" 窗口默认宽度
-"set columns=180
-
-" 自动缩进
-set autoindent
-" 智能对齐
-set smartindent
-" 显示行号
-set number
-" 一个Tab代表4个空格
-set tabstop=4
-" set guioptions+=Tiset
-set guioptions+=m
-" 解决菜单乱码
-"source $VIMRUNTIME/delmenu.vim
-"source $VIMRUNTIME/menu.vim
-" 设置双字宽显示
-set ambiwidth=double
-" 命令智能补全
-set wildmenu
-" 显示命令
-set showcmd
-" 命令行高度
-set cmdheight=1
-" 一直显示状态栏
+set hlsearch
+set nowrap
 set laststatus=2
-" 设置字体
-set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
-" 设置背景
-set background=dark
-" 设置主题acula
-colorscheme iceberg
-"jellybeans
-" 显示指令
-set showcmd
-set clipboard=unnamed
-"""""""""""function section
-"执行py或者sh
-func! CompileRunGcc()
-	exec "w"
-	if &filetype == 'python'
-		exec '!time python %'
-	elseif &filetype == 'sh'
-		:!time sh %
-	endif
-endfunc
-"生成文件名
-func! FileName()  
-    if line("$") > 10  
-        let l = 10  "这里是字母L 不是数字1   
-    else  
-        let l = line("$")  
-    endif   
-    exe "1," . l . "g/File Name:.*/s/File Name:.*/File Name: " .expand("%")    
-       "最前面是数字1，这里的File Name: 要和模板中一致  
-endfun   
-"生成创建时间
-func! CreateTime()  
-    if line("$") > 10  
-        let l = 10  
-    else  
-        let l = line("$")  
-    endif   
-    exe "1," . l . "g/Create Time:.*/s/Create Time:.*/Create Time: " .strftime("%Y-%m-%d %T")   
-        "这里Create Time: 要和模板中一致  
-endfun
-"""""""""""python setting
-au BufNewFile,BufRead *.py
-			\ set tabstop=4 |
-			\ set softtabstop=4 |
-			\ set shiftwidth=4 |
-			\ set textwidth=79 |
-			\ set expandtab |
-			\ set autoindent |
-			\ set fileformat=unix
+set showmatch
+set enc=utf-8
+set guifont=DroidSansMono_Nerd_Font:h14
+set nobackup
+set noswapfile
+set autoread
+set fdm=manual
+set foldlevelstart=99
+set laststatus=2
+set fileencodings=utf-8
+set fencs=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set clipboard+=unnamed
+if has('mouse')
+    set mouse=a
+    set selectmode=mouse,key
+    set nomousehide
+endif
+set autoindent
 
-au BufNewFile *.py
+""""""
+call plug#begin('~/.vim/bundle') " vim-plug 初始化
+Plug 'skywind3000/asyncrun.vim'
+Plug 'dracula/vim'
+"Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-fugitive'
+"Plug 'rking/ag.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'Chiel92/vim-autoformat'
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+let g:formatters_python = ['autopep8']
+let g:formatter_yapf_style = 'pep8'
+let verbose=1
+nnoremap <S-f> :Autoformat<CR>
+"Plug 'Yggdroot/indentLin'
+"Plug 'Valloric/MatchTagAlways'
+"代码补全
+"Plug 'Valloric/YouCompleteMe'
+Plug 'davidhalter/jedi-vim'
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#use_splits_not_buffers = 'left'
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+"color scheme
+"格式检查
+Plug 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters ={'vue':['eslint','vls'],'python':['flake8']}
+"let b:ale_fixers = [
+"\   'remove_trailing_lines',
+"\   'isort',
+"\   'ale#fixers#generic_python#BreakUpLongLines',
+"\   'yapf',
+"\]
+"Plug 'google/yapf'
+"autocmd FileType python nnoremap <S-f> :0,$!yapf<CR>
+"文件查找器
+Plug 'scrooloose/nerdtree'
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+nnoremap <F3> :NERDTreeToggle<CR>
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) |cd %:p:h |endif
+"
+Plug 'ryanoasis/vim-devicons'
+"python template
+Plug 'aperezdc/vim-template'
+let g:templates_directory = '/Users/poseidon/.vim/templates'
+let g:templates_global_name_prefix='template'
+"let g:templates_name_prefix= 'template'
+"let g:templates_user_variables=[[]]
+"状态栏
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='dracula'
+"Plug 'lervag/vim-latex'
+"Plug 'jrosiek/vim-mark'
+"python 缩进
+Plug 'vim-scripts/indentpython.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+
+" markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'kannokanno/previm'
+Plug 'tyru/open-browser.vim'
+"Plug 'bigeaddgle/molokai'
+let g:rbpt_colorpairs = [
+                        \ ['brown',       'RoyalBlue3'],
+                        \ ['Darkblue',    'SeaGreen3'],
+                        \ ['darkgray',    'DarkOrchid3'],
+                        \ ['darkgreen',   'firebrick3'],
+                        \ ['darkcyan',    'RoyalBlue3'],
+                        \ ['darkred',     'SeaGreen3'],
+												\ ['darkmagenta', 'DarkOrchid3'],
+                        \ ['brown',       'firebrick3'],
+                        \ ['gray',        'RoyalBlue3'],
+                        \ ['darkmagenta', 'DarkOrchid3'],
+                        \ ['Darkblue',    'firebrick3'],
+                        \ ['darkgreen',   'RoyalBlue3'],
+                        \ ['darkcyan',    'SeaGreen3'],
+                        \ ['darkred',     'DarkOrchid3'],
+                        \ ['red',         'firebrick3'],
+                        \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+call plug#end()
+colorscheme dracula
+"python config
+au BufNewFile,BufRead *.py 
 			\ set tabstop=4 |
 			\ set softtabstop=4 |
 			\ set shiftwidth=4 |
+			\ set softtabstop=4 |
 			\ set textwidth=79 |
-			\ set expandtab |
 			\ set autoindent |
 			\ set fileformat=unix |
-			\ 0r ~/.vim/template/python_header |
-			\ ks | call CreateTime() | 's
+			\ set expandtab 
+let g:ycm_autoclose_preview_window_after_completion=1
+let python_highlight_all=1
+nnoremap <F5> :call <SID>compile_and_run()<CR>
 
-"""""""""""sh setting
-au BufNewFile *.sh
-			\ 0r ~/.vim/template/sh_header |
-			\ ks | call CreateTime() | 's
+function! s:compile_and_run()
+    exec 'w'
+    if &filetype == 'c'
+        exec "AsyncRun! gcc % -o %<; time ./%<"
+    elseif &filetype == 'cpp'
+       exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
+    elseif &filetype == 'java'
+       exec "AsyncRun! javac %; time java %<"
+    elseif &filetype == 'sh'
+       exec "AsyncRun! time bash %"
+    elseif &filetype == 'python'
+       exec "AsyncRun! time python %"
+    endif
+endfunction
 
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"				keymap setting						"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-map <F5> :call CompileRunGcc()<CR>
-map <C-t> :NERDTreeToggle<CR>
-nmap <S-f> :Autoformat<CR>
-"nmap <Leader>d :ALEDetail<CR>
-nmap <F4> :TagbarToggle<CR>
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-" put plugin setting here
-
-
-
-
-
-
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"source ~/.vim/config/python-mode.vim
