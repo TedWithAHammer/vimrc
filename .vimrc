@@ -35,6 +35,7 @@ set autoindent
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dracula/vim'
+Plug 'fatih/vim-go'
 "Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-fugitive'
 "Plug 'rking/ag.vim'
