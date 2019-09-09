@@ -43,7 +43,7 @@ Plug 'tpope/vim-fugitive'
 "Plug 'rking/ag.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'skywind3000/asyncrun.vim'
-let g:asyncrun_open=6
+"let g:asyncrun_open=6
 Plug 'Chiel92/vim-autoformat'
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
@@ -187,7 +187,9 @@ function! s:compile_and_run()
     elseif &filetype == 'sh'
        exec "AsyncRun! time bash %"
     elseif &filetype == 'python'
-       exec "AsyncRun! time python %"
+       exec "!time python %"
+		elseif &filetype == 'go'
+       exec "GoRun"
     endif
 endfunction
 
