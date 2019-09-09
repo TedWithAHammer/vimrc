@@ -33,7 +33,6 @@ set autoindent
 
 """"""
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
-Plug 'skywind3000/asyncrun.vim'
 Plug 'dracula/vim'
 Plug 'fatih/vim-go'
 let g:go_auto_sameids = 1
@@ -43,6 +42,8 @@ let OmniCpp_MayCompleteDot = 1
 Plug 'tpope/vim-fugitive'
 "Plug 'rking/ag.vim'
 Plug 'kien/ctrlp.vim'
+Plug 'skywind3000/asyncrun.vim'
+let g:asyncrun_open=6
 Plug 'Chiel92/vim-autoformat'
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
@@ -126,7 +127,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'kannokanno/previm'
 Plug 'tyru/open-browser.vim'
 Plug 'majutsushi/tagbar'
-let g:tagbar_ctags_bin='/usr/bin/ctags'
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_width=20
 nmap <F4> :TagbarToggle<CR>
 "Plug 'bigeaddgle/molokai'
@@ -171,7 +172,7 @@ au BufNewFile,BufRead *.go
 			\ set autoindent |
 			\ set textwidth=79 |
 			\ set expandtab
-let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_autoclose_preview_window_after_completion=1
 let python_highlight_all=1
 nnoremap <F5> :call <SID>compile_and_run()<CR>
 
