@@ -106,7 +106,7 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 Plug 'ryanoasis/vim-devicons'
 "python template
 Plug 'aperezdc/vim-template'
-let g:templates_directory = '/Users/poseidon/.vim/templates'
+let g:templates_directory = '~/.vim/templates'
 let g:templates_global_name_prefix='template'
 "let g:templates_name_prefix= 'template'
 "let g:templates_user_variables=[[]]
