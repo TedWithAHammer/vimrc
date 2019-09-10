@@ -193,9 +193,10 @@ function! s:compile_and_run()
     elseif &filetype == 'python'
        exec "!time python %"
 		elseif &filetype == 'go'
-       exec "GoRun"
+				exec "GoBuild"
+				exec "GoRun"
     endif
-endfunction
+endfunc
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
