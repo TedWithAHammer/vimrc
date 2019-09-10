@@ -42,7 +42,7 @@ let OmniCpp_MayCompleteDot = 1
 Plug 'tpope/vim-fugitive'
 "Plug 'rking/ag.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'skywind3000/asyncrun.vim'
+"Plug 'skywind3000/asyncrun.vim'
 "let g:asyncrun_open=6
 Plug 'Chiel92/vim-autoformat'
 let g:autoformat_autoindent = 0
@@ -166,26 +166,30 @@ au BufNewFile,BufRead *.py
 			\ set autoindent |
 			\ set fileformat=unix |
 			\ set expandtab 
+let python_highlight_all=1
+" go config
 au BufNewFile,BufRead *.go
 			\ set ts=4 |
 			\ set sw=4 |
 			\ set autoindent |
 			\ set textwidth=79 |
+			\ set autoindent |
+			\ set fileformat=unix |
 			\ set expandtab
-" let g:ycm_autoclose_preview_window_after_completion=1
-let python_highlight_all=1
-nnoremap <F5> :call <SID>compile_and_run()<CR>
+" vim-go depend on ominfunc (auto complete after dot)
+au filetype go inoremap <buffer> . .<C-x><C-o>
 
+nnoremap <F5> :call <SID>compile_and_run()<CR>
 function! s:compile_and_run()
     exec 'w'
     if &filetype == 'c'
-        exec "AsyncRun! gcc % -o %<; time ./%<"
+        exec "!gcc % -o %<; time ./%<"
     elseif &filetype == 'cpp'
-       exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
+       exec "! g++ -std=c++11 % -o %<; time ./%<"
     elseif &filetype == 'java'
-       exec "AsyncRun! javac %; time java %<"
+       exec "!javac %; time java %<"
     elseif &filetype == 'sh'
-       exec "AsyncRun! time bash %"
+       exec "!time bash %"
     elseif &filetype == 'python'
        exec "!time python %"
 		elseif &filetype == 'go'
