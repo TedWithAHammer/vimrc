@@ -14,7 +14,7 @@ set nowrap
 set laststatus=2
 set showmatch
 set enc=utf-8
-set guifont=DroidSansMono_Nerd_Font:h14
+set guifont=HackNerdFontCompleteM-Regular:h14
 set nobackup
 set noswapfile
 set autoread
@@ -119,6 +119,9 @@ Plug 'chriskempson/vim-tomorrow-theme'
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+nmap <silent> <F8> <Plug>MarkdownPreview        
 Plug 'kannokanno/previm'
 Plug 'tyru/open-browser.vim'
 "Plug 'bigeaddgle/molokai'

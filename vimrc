@@ -10,11 +10,11 @@ set history=1024
 set nocursorline
 set ignorecase
 set hlsearch
-set nowrap
+set wrap
 set laststatus=2
 set showmatch
 set enc=utf-8
-set guifont=DroidSansMono_Nerd_Font:h14
+set guifont=HackNerdFontCompleteM-Regular:h16
 set nobackup
 set noswapfile
 set autoread
