@@ -173,8 +173,9 @@ au BufNewFile,BufRead *.py
 let python_highlight_all=1
 " go config
 au BufNewFile,BufRead *.go
-			\ set ts=4 |
-			\ set sw=4 |
+			\ set tabstop=4 |
+			\ set softtabstop=4 |
+			\ set shiftwidth=4 |
 			\ set autoindent |
 			\ set textwidth=79 |
 			\ set autoindent |
@@ -197,8 +198,8 @@ function! s:compile_and_run()
     elseif &filetype == 'python'
        exec "!time python %"
 		elseif &filetype == 'go'
-				exec "GoBuild"
-				exec "GoRun"
+			 exec "GoBuild"
+			 exec "GoRun"
     endif
 endfunc
 
