@@ -14,7 +14,7 @@ set wrap
 set laststatus=2
 set showmatch
 set enc=utf-8
-set guifont=HackNerdFontCompleteM-Regular:h16
+set guifont=HackNerdFontCompleteM-Regular:h15
 set nobackup
 set noswapfile
 set autoread
@@ -101,6 +101,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
+let NERDTreeShowHidden=1
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) |cd %:p:h |endif
 "
 Plug 'ryanoasis/vim-devicons'
@@ -123,14 +124,17 @@ Plug 'chriskempson/vim-tomorrow-theme'
 
 " markdown
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'kannokanno/previm'
-Plug 'tyru/open-browser.vim'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+nmap <silent> <F8> <Plug>MarkdownPreview  
+"Plug 'plasticboy/vim-markdown'
+"Plug 'kannokanno/previm'
+"Plug 'tyru/open-browser.vim'
 Plug 'majutsushi/tagbar'
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_width=20
 nmap <F4> :TagbarToggle<CR>
-"Plug 'bigeaddgle/molokai'
+" Plug 'bigeaddgle/molokai'
 let g:rbpt_colorpairs = [
                         \ ['brown',       'RoyalBlue3'],
                         \ ['Darkblue',    'SeaGreen3'],
@@ -205,3 +209,4 @@ nnoremap <C-H> <C-W><C-H>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "source ~/.vim/config/python-mode.vim
+
