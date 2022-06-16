@@ -196,7 +196,7 @@ function! s:compile_and_run()
     elseif &filetype == 'sh'
        exec "!time bash %"
     elseif &filetype == 'python'
-       exec "!time python %"
+       exec "!time python3 %"
 		elseif &filetype == 'go'
 			 exec "GoBuild"
 			 exec "GoRun"
