@@ -56,7 +56,9 @@ nnoremap <S-f> :Autoformat<CR>
 "Plug 'Yggdroot/indentLin'
 "Plug 'Valloric/MatchTagAlways'
 "代码补全
-"Plug 'Valloric/YouCompleteMe'
+"Plug 'artur-shaik/vim-javacomplete2'
+"autocmd FileType java 
+"setlocal omnifunc=javacomplete#Complete
 Plug 'davidhalter/jedi-vim'
 let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#use_splits_not_buffers = 'left'
@@ -67,6 +69,7 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
+let g:jedi#popup_on_dot=0
 "color scheme
 "格式检查
 Plug 'dense-analysis/ale'
@@ -77,6 +80,8 @@ let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters ={'vue':['eslint','vls'],'python':['flake8'], 'go': ['gofmt', 'golint', 'go vet']}
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
 "let b:ale_fixers = [
 "\   'remove_trailing_lines',
 "\   'isort',
@@ -130,6 +135,11 @@ nmap <silent> <F8> <Plug>MarkdownPreview
 "Plug 'plasticboy/vim-markdown'
 "Plug 'kannokanno/previm'
 "Plug 'tyru/open-browser.vim'
+Plug 'neoclide/coc.nvim',{'branch':'release'}
+autocmd CursorHold * silent call CocActionAsync('highlight')
+inoremap <silent><expr> <TAB>
+	\ pumvisible() ? coc#_select_confirm() :
+	\ coc#refresh()
 Plug 'majutsushi/tagbar'
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_width=20
